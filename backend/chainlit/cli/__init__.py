@@ -47,6 +47,8 @@ def run_chainlit(target: str):
         "yes",
     ]  # Convert to boolean
 
+    uvicorn_log_config_env = os.environ.get("UVICORN_LOG_CONFIG", uvicorn.config.LOGGING_CONFIG)
+
     config.run.host = host
     config.run.port = port
 
@@ -73,6 +75,7 @@ def run_chainlit(target: str):
             app,
             host=host,
             port=port,
+            log_config=uvicorn_log_config_env,
             log_level=log_level,
             ws_per_message_deflate=ws_per_message_deflate,
         )
